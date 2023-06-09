@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>shoppingcar</title>
+  <link rel="stylesheet" href="static/css/iconfont.css">
+  <link rel="stylesheet" href="static/css/shoppingCar.css">
+</head>
+<body>
+<div id="aVue">
+  <template v-if="items.length">
+    <table>
+      <caption>
+        <h2>购物车</h2>
+      </caption>
+      <thead>
+      <tr>
+        <th><input type="checkbox" v-model="selectAllCheckbox" @click="selectAll"></th><!--将checkbox的选中状态与selectAllCheckbox绑定，选中则为true，否则为false-->
+        <th>商品名称</th>
+        <th>商品单价</th>
+        <th>购买数量</th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <template v-for="(item,index) in items"><!--二维数组的遍历，算是一个需要学习的点，tbody需要使用template包起来，单就tbody不能使用v-for指令-->
+        <tbody>
+        <tr>
+          <td colspan="5">{{ item[0].type }}</td><!--分类显示商品-->
+        </tr>
+        <tr v-for="(itemss,index1) in item"><!--将数据遍历生成表格行-->
+          <td><input type="checkbox" v-model="selectedBox[index][index1]" :value="itemss.id" @change="checkAll"></td><!--将checkbox的选中状态与多维数组进行绑定-->
+          <td>{{ itemss.name }}</td>
+          <td>{{ itemss.price }}</td>
+          <td>
+            <span class="iconfont icon-jianhao span_1" v-on:click="subCount(itemss)"></span><!--添加数量-->
+            {{ itemss.count }}
+            <span class="iconfont icon-jiahao1 span_1" v-on:click="addCount(itemss)"></span><!--减少数量-->
+          </td>
+          <td>
+            <span class="iconfont icon-shanchu" v-on:click="deleteItem(index,index1)"></span><!--删除某一个商品-->
+          </td>
+        </tr>
+        </tbody>
+      </template>
+    </table>
+    <p>总价：{{ sumPrice }}</p><!--商品总价，使用计算属性-->
+  </template>
+
+  <template v-else>
+    <div>购物车为空</div><!--当购物车中无商品时，基于用户友好提示-->
+  </template>
+
+</div>
+<!-- built files will be auto injected -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="static/js/shoppingCar.js"></script>
+</body>
+
+</html>

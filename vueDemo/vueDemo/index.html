@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>vuedemo</title>
+</head>
+<body>
+<div id="app">
+  <input type="text" @input="handleInput">
+  这是input中的内容：{{ message }}
+  <hr>
+  <p>这是一个单选按钮</p>
+  <input type="radio" v-bind:checked="selected"><!--或者是:checked = 'selected'-->
+  <hr>
+  <input type="radio" v-model="course" value="html" id="html">
+  <label for="html">html</label>
+  <input type="radio" v-model="course" value="Javascript" id="Javascript">
+  <label for="Javascript">Javascript</label>
+  <input type="radio" v-model="course" value="CSS" id="CSS">
+  <label for="CSS">CSS</label>
+  <p>当前选中的项为： {{ course }}</p>
+  <hr>
+  <input type="checkbox" :checked="checkboxStatus">
+  <hr>
+  <p>这是复选框</p><!-- 当某个选项被选中后，将会把它的value值放入checkBoxMult中，取消选中则也是一样 -->
+  <input type="checkbox" v-model="checkBoxMult" id="Java" value="Java">
+  <label for="Java">Java</label><!-- 加for属性的目的是当用户点击的是文字，也可以将单选框选中，这个for属性的值与要关联的多选框的id值需要一样 -->
+  <input type="checkbox" v-model="checkBoxMult" id="C" value="C">
+  <label for="C">C</label>
+  <input type="checkbox" v-model="checkBoxMult" id="C++" value="C++">
+  <label for="C++">C++</label>
+  <p>当前选中的项为： {{ checkBoxMult }}</p>
+  <hr>
+  <p>下拉框的使用(单选)</p>
+  请选择一位英雄：<select v-model="selectUse">
+  <option>邪剑仙</option>
+  <option>龙葵</option>
+  <option>白豆腐</option>
+  <option>雪见</option>
+  <option>景天</option>
+</select>
+  select标签中选中的是：{{ selectUse }}
+  <hr>
+  <p>下拉框的使用(多选)</p>
+  请选择多位英雄：<select v-model="selectUseAll" multiple>
+  <option>邪剑仙</option>
+  <option>龙葵</option>
+  <option>白豆腐</option>
+  <option>雪见</option>
+  <option>景天</option>
+</select>
+  select标签中选中的是：{{ selectUseAll }}
+  <hr>
+  <p>绑定值之单选框</p>
+  <input type="radio" v-model="radioSelect" :value="radioValue">
+  <!-- 当选中时会将value对应的值赋值给radioSelect，而不是简单的赋值为true 或者 false -->
+  <label>单选框</label>
+  <p>选中的值为 {{ radioSelect }} + {{ radioValue }}</p>
+  <hr>
+  <p>绑定值之多选框</p>
+  <input type="checkbox" v-model="checkBoxBindValue"
+         :true-value="value1"
+         :false-value="value2">
+  <label>多选框</label>
+  <p>值为：{{ checkBoxBindValue }}</p>
+  <hr>
+  <p>绑定值之选择列表</p>
+  <select v-model="selectBindValue" multiple>
+    <option :value="value3">1</option><!-- 当这个选项被选中时，会将value3的值赋值给selectBindValue，多选也是一样 -->
+    <option :value="value4">2</option>
+    <option :value="value5">3</option>
+    <option :value="value6">4</option>
+  </select>
+  选择框选择的是:{{selectBindValue}}
+  <hr>
+  <p>.lazy延迟同步数据</p>
+  <input type="text" v-model.lazy="inputText">
+  这是值：{{inputText}}
+  <hr>
+  <p>.number转换为数字</p>
+  <input type="number" v-model.number="inputText">
+  这是值:{{typeof inputText}}
+  <hr>
+  <p>.trim消除前后空格</p>
+  <input type="text" v-model.trim.lazy="trimMessage">
+  这是值：{{trimMessage}}
+</div>
+<!-- built files will be auto injected -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="static/js/demo.js"></script>
+</body>
+</html>
